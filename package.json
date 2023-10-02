@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "sst bind next dev",
-    "build": "next build",
+    "build": "sst bind next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "yarn lint"
   },
   "dependencies": {
     "next": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "stripe": "^13.8.0"
   },
   "devDependencies": {
     "@pandacss/dev": "^0.15.4",

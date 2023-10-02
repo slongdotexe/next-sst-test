@@ -36,3 +36,7 @@ next-env.d.ts
 
 .sst/
 .sst.config*
+
+.open-next
+
+.env

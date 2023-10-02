@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "eslint-config-labrys"],
+  "extends": ["eslint-config-labrys"],
   "rules": {
     "eslint-comments/disable-enable-pair": "off",
     "no-unused-vars": "off",

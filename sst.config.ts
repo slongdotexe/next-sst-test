@@ -1,20 +1,19 @@
+import { IAM } from "@app/stacks/IAM";
+import { Nextjs } from "@app/stacks/Nextjs";
 import { SSTConfig } from "sst";
-import { NextjsSite } from "sst/constructs";
+
 
 export default {
   config(_input) {
     return {
       name: "next-sst-test",
-      region: "us-east-1",
+      region: "ap-southeast-2", 
+      profile: process.env.CI === "ci" ? "default" : "next-sst-deploy",
     };
   },
   stacks(app) {
-    app.stack(({ stack }) => {
-      const site = new NextjsSite(stack, "site");
-
-      stack.addOutputs({
-        SiteUrl: site.url,
-      });
-    });
+    app.stack(Nextjs);
+    app.stack(IAM)
   },
+
 } satisfies SSTConfig;
