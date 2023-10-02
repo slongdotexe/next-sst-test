@@ -3,6 +3,7 @@ import * as iam from "aws-cdk-lib/aws-iam";
 import { StackContext } from "sst/constructs";
 
 export function IAM({ app, stack }: StackContext) {
+  if(stack.stage !== "prod") return;
 
   const provider = new iam.OpenIdConnectProvider(stack, "GitHub", {
     url: "https://token.actions.githubusercontent.com",
@@ -13,7 +14,7 @@ export function IAM({ app, stack }: StackContext) {
   const repository = "next-sst-test";
 
   // eslint-disable-next-line no-new -- STS do be this way
-  new iam.Role(stack, "GitHubActionsRole", {
+  new iam.Role(stack, "GitHubSstDeployer", {
     assumedBy: new iam.OpenIdConnectPrincipal(provider).withConditions({
       StringLike: {
         "token.actions.githubusercontent.com:sub": `repo:${organization}/${repository}:*`,

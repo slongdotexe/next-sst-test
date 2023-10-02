@@ -2,10 +2,6 @@ import { Config, NextjsSite, StackContext } from "sst/constructs";
 
 export function Nextjs({ stack }: StackContext) {
   const STRIPE_SECRET_KEY = new Config.Secret(stack, "STRIPE_SECRET_KEY");
-  const SOME_PARAM = new Config.Parameter(stack, "SOME_PARAM", {
-    value: "some value",
-  });
-
   const NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = new Config.Parameter(
     stack,
     "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
@@ -15,7 +11,7 @@ export function Nextjs({ stack }: StackContext) {
   );
 
   const site = new NextjsSite(stack, "site", {
-    bind: [STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, SOME_PARAM],
+    bind: [STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY],
     environment: {
       NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:
         NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY.value,
