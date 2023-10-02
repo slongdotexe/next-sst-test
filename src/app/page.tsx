@@ -13,6 +13,8 @@ interface ProductTileProps {
 }
 
 const ProductTile = ({ title, price, image }: ProductTileProps) => (
+  <>
+  <h1>Hello from PR environment</h1>
   <div
     className={vstack({
       padding: 4,
@@ -58,6 +60,7 @@ const ProductTile = ({ title, price, image }: ProductTileProps) => (
       ${price / 100}
     </p>
   </div>
+  </>
 );
 
 const ProductGrid = ({ children }: { children: React.ReactNode }) => (

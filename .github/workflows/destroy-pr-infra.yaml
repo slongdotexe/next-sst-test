@@ -1,7 +1,7 @@
-name: Deploy PR Infrastructure
+name: Destroy PR Infrastructure
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [closed]
 jobs:
   Deploy:
     runs-on: ubuntu-latest
@@ -18,5 +18,5 @@ jobs:
           role-to-assume: arn:aws:iam::206665440523:role/GitHubSstDeployer
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Deploy Stacks
-        run: npx sst deploy --stage pr-${{ github.event.number }}
+      - name: Remove Stacks
+        run: npx sst remove --stage pr-${{ github.event.number }}
