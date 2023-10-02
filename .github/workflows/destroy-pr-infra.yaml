@@ -18,5 +18,5 @@ jobs:
           role-to-assume: arn:aws:iam::206665440523:role/GitHubSstDeployer
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-      - name: Deploy app
+      - name: Remove Stacks
         run: npx sst remove --stage pr-${{ github.event.number }}
