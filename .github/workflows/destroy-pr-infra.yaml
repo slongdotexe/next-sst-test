@@ -1,0 +1,22 @@
+name: Destroy PR Infrastructure
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read  
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ap-southeast-2
+          role-to-assume: arn:aws:iam::206665440523:role/GitHubSstDeployer
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+      - name: Deploy app
+        run: npx sst remove --stage pr-${{ github.event.number }}
